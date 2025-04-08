@@ -1,1 +1,2 @@
-pip3 install boto3
+boto3==1.37.29
+streamlit==1.44.1
