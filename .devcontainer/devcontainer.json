@@ -1,24 +1,44 @@
 {
-  "customizations": {
-    "codespaces": {
-      "openFiles": [
-        "README.md"
-      ]
-    },
-    "vscode": {
-      // Set *default* container specific settings.json values on container create.
-      "settings": {
-        "terminal.integrated.shell.linux": "/bin/bash"
-      },
-      // Add the IDs of extensions you want installed when the container is created.
-      "extensions": [
-        "linkedinlearning.linkedinlearning-vscode-theme"
-      ]
+  "name": "Ubuntu",
+  "build": {
+    "dockerfile": "Dockerfile",
+    // Update 'VARIANT' to pick an Ubuntu version: jammy / ubuntu-22.04, focal / ubuntu-20.04, bionic /ubuntu-18.04
+    // Use ubuntu-22.04 or ubuntu-18.04 on local arm64/Apple Silicon.
+    "args": {
+      "VARIANT": "focal"
     }
   },
-  // Update welcome text and set terminal prompt to '$ '
-  "onCreateCommand": "echo PS1='\"$ \"' >> ~/.bashrc",
-  // Pull all branches
-  "postAttachCommand": "git pull --all"
+  // Use 'forwardPorts' to make a list of ports inside the container available locally.
+  // "forwardPorts": [],
+  // Use 'postCreateCommand' to run commands after the container is created.
+  // "postCreateCommand": "uname -a",
+  // Comment out to connect as root instead. More info: https://aka.ms/vscode-remote/containers/non-root.
+  "remoteUser": "vscode",
+  "mounts": [
+    "source=${env:HOME}${env:USERPROFILE}/.aws,target=/vscode/.aws,type=bind",
+    "source=${env:HOME}${env:USERPROFILE}/Documents/Onepoint/cloudbooster/,target=/workspaces/,type=bind",
+  ],
+  "features": {
+    "terraform": {
+      "version": "latest",
+      "tflint": "latest",
+      "terragrunt": "latest"
+    },
+    "ghcr.io/nikiforovall/devcontainer-features/dotnet-aspire:1": {
+      "dotnetVersion": "5.0"
+    },
+    "ghcr.io/devcontainers/features/powershell:1": {
+      "version": "7.4"
+    }
+  },
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "ms-python.python",
+        "ms-azuretools.vscode-docker",
+        "amazonwebservices.aws-toolkit-vscode",
+        "AmazonWebServices.amazon-q-vscode"
+      ]
+    }
+  }
 }
-// DevContainer Reference: https://code.visualstudio.com/docs/remote/devcontainerjson-reference
