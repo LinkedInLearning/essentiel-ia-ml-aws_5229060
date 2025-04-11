@@ -1,0 +1,1 @@
+Découvrez comment exploiter les services de machine learning pré-entraînés d’AWS, en intégrant Polly, S3 et Transcribe, tout en automatisant les workflows grâce à Python et Boto3.
